@@ -1,0 +1,134 @@
+/* Setup */
+@import './setup/vars.css';
+@import './setup/font-face.css';
+
+/* Basic */
+/* @import './basic/base.css';
+@import './basic/buttons.css';
+@import './basic/icons.css'; */
+@import './basic/helpers.css';
+/* @import './basic/layout.css'; */
+
+/* Cmps */
+/* @import './cmps/header.css';
+@import './cmps/main-content.css';
+@import './cmps/modal.css';
+@import './cmps/dropdown.css';
+@import './cmps/footer.css'; */
+
+
+
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    background-color: rgba(238, 231, 202, 0.909);
+}
+
+.gallery-nav{
+    justify-content: center;
+}
+.filter-list a{
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+}
+.meme-search-bar{
+    border-radius: 2em;
+}
+
+.meme-card{
+    display: inline-block;
+    max-width: 100%;
+}
+
+.main-cont{
+    margin: 1rem 0.875rem;
+    background-color: blanchedalmond;
+    justify-content: center;
+    
+}
+.gallery-container{
+    padding: 45px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap:30px;
+}
+.text-line-actions button{
+    width: 55px;
+    height: 55px;
+    /* background-color: red; */
+    
+}
+
+.text-line-actions button img{
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.canvas-container{
+    width: 476px;
+    height: 546px;
+       
+}
+.meme-editor{
+    padding: 20px 95px;
+    justify-content: center;
+}
+
+.editor{
+    width: 525px;
+    height: 546px;
+    background-color: brown;
+    outline: 1px solid black;
+    
+    flex-direction: column;
+    margin-inline-start: 90px;
+}
+.meme-text{
+    border-radius: 2em;
+    text-align: center;
+    padding:20px 0px;
+    margin:1.5rem 2.5rem ;
+    min-width: 80%;
+}
+canvas {
+    display: block;
+    margin:  auto;
+    outline: 1px solid black;
+    background-color: white;
+   
+}
+.meme-text-value{
+    position: fixed;
+    background-color: transparent;
+    border: 1px solid black;
+    height: 50px;
+    font-size: 40px;
+    /* z-index: 1; */
+    width: 476px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    top:0px;
+    color: white;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    
+}
+.meme-text-value.line1{
+    top: 8px; 
+}
+.line2{
+    top: 300px;
+}
+
+.text-options button img{
+    width: 100%;
+    height: 100%;
+}
+.text-options button{
+    width: 40px;
+    height: 40px;
+}
+

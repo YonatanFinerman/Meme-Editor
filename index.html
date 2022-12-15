@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Editor</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body onload="init()">
+    <header class="main-header flex align-center space-between">
+        <div class="logo">Logo</div>
+        <nav>
+            <button class="gallery-btn">Gallery</button>
+            <button class="memes-btn">Memes</button>
+            <button class="about-btn">About</button>
+        </nav>
+    </header>
+    <main class="main-cont">
+        <nav class="gallery-nav flex">
+            <input class="meme-search-bar" type="search" place holder="Search">
+            <ul class="filter-list flex clean-list"> 
+                <li><a href="">funny</a></li>
+                <li><a href="">animal</a></li>
+                <li><a href="">baby</a></li>
+                <li><a href="">comic</a></li>
+                <li><a href="">smile</a></li>
+                <li><a href="">man</a></li>
+            </ul>
+            <button>More</button>
+        </nav>
+        <section class="gallery-container "></section>
+
+    </main>
+
+    <section class="meme-editor flex  " hiddenn>
+        <div class="canvas-container">
+            <canvas id="my-canvas" height="450" width="450">
+            </canvas>
+            <!-- <p class="meme-text-value " hidden></p> -->
+          
+        </div>
+        <div class="editor flex align-center">
+            <input class="meme-text" type="text" oninput="onMemeTextInput(this.value)" placeholder="Write Text">
+            <div class="text-line-actions">
+                <button class="arrows-btn"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                <button class="add-btn" onclick="addTextTOcanvas(); onAddTextLine()"><img src="icons/add.png" alt=""></button>
+                <button class="trash-btn"><img src="icons/trash.png" alt=""></button>
+                
+            </div>
+            <div class="text-options">
+                <button class="bigger-text-btn"><img src="ICONS/increase font - icon.png" alt=""></button>
+                <button class="smaller-text-btn"><img src="ICONS/decrease font - icon.png" alt=""></button>
+                <button class="align-left-btn"><img src="ICONS/align-to-left.png" alt=""></button>
+                <button class="align-center-btn"><img src="ICONS/center-text-alignment.png" alt=""></button>
+                <button class="align-right-btn"><img src="ICONS/align-to-right.png" alt=""></button>
+                <select onchange="onSetFont(this.value)">
+                    <option value="impact">Impact</option>
+                    <option value="arial">Arial</option>
+                    <option value="courier">Courier</option>
+    
+                </select>
+                <button class="save-btn"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                <button class="color-btn"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                
+                
+            </div>
+            
+            
+            <button><a href="#" onclick="downloadCanvas(this)" download="my-img">🖥</a></button>
+        </div>
+
+    </section>
+   
+
+
+    <script src="js/services/storage-service.js"></script>
+    <script src="js/services/util-service.js"></script>
+    <script src="js/services/download-service.js"></script>
+    <script src="js/services/upload-service.js"></script>
+    <script src="js/services/meme-service.js"></script>
+    <script src="js/services/editor-service.js"></script>
+   <script src="js/control.js"></script> 
+</body>
+</html>
