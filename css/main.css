@@ -58,6 +58,7 @@ body{
 .text-line-actions button{
     width: 55px;
     height: 55px;
+    margin-inline-end: 25px;
     /* background-color: red; */
     
 }
@@ -101,13 +102,12 @@ canvas {
     background-color: white;
    
 }
-.meme-text-value{
+/* .meme-text-value{
     position: fixed;
     background-color: transparent;
     border: 1px solid black;
     height: 50px;
     font-size: 40px;
-    /* z-index: 1; */
     width: 476px;
     text-align: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -121,14 +121,51 @@ canvas {
 }
 .line2{
     top: 300px;
-}
+} */
 
 .text-options button img{
     width: 100%;
     height: 100%;
 }
 .text-options button{
-    width: 40px;
-    height: 40px;
+    width: 52.5px;
+    height: 52.5px;
+    /* margin-inline-end: 38px; */
+}
+.text-options{
+    margin-top:27px ;
+    margin-bottom: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr ;
+    row-gap: 19px;
+    column-gap: 38px;
+    grid-template-areas: 
+    "bigger smallert lefta centera righta"
+    "font font font save colora";
+}
+.bigger-text-btn{
+    grid-area: bigger;
+}
+.smaller-text-btn{
+    grid-area: smallert;
+}
+.align-left-btn{
+    grid-area: lefta;
+}
+.align-center-btn{
+    grid-area: centera; 
+}
+.align-right-btn{
+    grid-area: righta;
+}
+.font-select{
+    grid-area: font;
+}
+.save-btn{
+    grid-area: save;
+}
+.color-btn{
+    grid-area: colora;
 }
 

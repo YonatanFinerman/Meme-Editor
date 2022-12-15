@@ -29,7 +29,7 @@ function onCardClick(id) {
     document.querySelector('.meme-editor').hidden = false
     drawImg(id)
     gCurrMemeId = id
-    console.log(gCurrMemeId)
+
 }
 
 function drawImg(id) {
@@ -42,7 +42,7 @@ function drawImg(id) {
     }
 }
 
-function onMemeTextInput(val){
+function onMemeTextInput(val) {
     var currMeme = getMemes().find(meme => meme.id === gCurrMemeId)
     currMeme.lines[(+currMeme.selectedLineIdx)].text = val
     addTextTOcanvas()
@@ -52,35 +52,24 @@ function onMemeTextInput(val){
 
 function addTextTOcanvas() {
     let currMeme = getMemes().find(meme => meme.id === gCurrMemeId)
-    console.log('cur mem',currMeme)
+
     let canvasXCenter = gElCanvas.width / 2
     let canvasYCenter = gElCanvas.height / 2
 
     currMeme.lines.forEach((line, idx) => {
         if (idx === 0) {
-            
-            drawText(line.text, canvasXCenter, line.size, line.size, line.color)
+
+            drawText(line.text, canvasXCenter, line.size, line.size, line.color, line.align)
         }
         else if (idx === 1) {
-            drawText(line.text, canvasXCenter, gElCanvas.height - line.size, line.size, line.color)
+            drawText(line.text, canvasXCenter, gElCanvas.height - line.size, line.size, line.color, line.align)
         }
         else {
-            drawText(line.text, canvasXCenter, canvasYCenter, line.size, line.color)
+            drawText(line.text, canvasXCenter, canvasYCenter, line.size, line.color, line.align)
         }
     })
 
 
-}
-function drawText(text, x, y, size = 40, color) {
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = color
-    gCtx.font = `${size}px Impact`;
-    gCtx.textAlign = 'center'
-    gCtx.textBaseline = 'middle'
-
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
 }
 
 function resizeCanvas() {
@@ -89,10 +78,60 @@ function resizeCanvas() {
     gElCanvas.height = elContainer.offsetHeight
 }
 
-function onAddTextLine(){
+function onAddTextLine() {
+    addTextTOcanvas()
     updateLineIdx(gCurrMemeId)
     let elMemeInput = document.querySelector('.meme-text')
     let currMeme = getMemes().find(meme => meme.id === gCurrMemeId)
     currMeme.lines.push(addNewLine())
     elMemeInput.value = ''
 }
+function onSetFont(val) {
+
+}
+
+function onChangeFontSize(val) {
+    console.log(val)
+    let curMeme = findMemeById(gCurrMemeId)
+    if (curMeme.lines[curMeme.selectedLineIdx].size < 90 && val === '+'){
+        curMeme.lines[curMeme.selectedLineIdx].size += 5
+    } 
+    else if (curMeme.lines[curMeme.selectedLineIdx].size > 20 && val === '-') {
+        curMeme.lines[curMeme.selectedLineIdx].size -= 5
+    }
+    let elMemeInputValue = document.querySelector('.meme-text').value
+    onMemeTextInput(elMemeInputValue)
+}
+
+function onAlignText(val) {
+    let curMeme = findMemeById(gCurrMemeId)
+    if (val === 'right') {
+        curMeme.lines[curMeme.selectedLineIdx].align = 'start'
+    }
+    else if (val === 'left') {
+        curMeme.lines[curMeme.selectedLineIdx].align = 'end'
+    }
+    else if (val === 'center') {
+
+        curMeme.lines[curMeme.selectedLineIdx].align = 'center'
+    }
+
+    let elMemeInputValue = document.querySelector('.meme-text').value
+    onMemeTextInput(elMemeInputValue)
+}
+
+function drawText(text, x, y, size = 40, color, align) {
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = 'black'
+    gCtx.fillStyle = color
+    gCtx.font = `${size}px Impact`;
+    gCtx.textAlign = align
+    gCtx.textBaseline = 'middle'
+
+    gCtx.fillText(text, x, y)
+    gCtx.strokeText(text, x, y)
+}
+
+
+
+

@@ -13,7 +13,7 @@
         <nav>
             <button class="gallery-btn">Gallery</button>
             <button class="memes-btn">Memes</button>
-            <button class="about-btn">ABOUT</button>
+            <button class="about-btn">About</button>
         </nav>
     </header>
     <main class="main-cont">
@@ -43,18 +43,18 @@
         <div class="editor flex align-center">
             <input class="meme-text" type="text" oninput="onMemeTextInput(this.value)" placeholder="Write Text">
             <div class="text-line-actions">
-                <button class="arrows-btn"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
-                <button class="add-btn" onclick="addTextTOcanvas(); onAddTextLine()"><img src="icons/add.png" alt=""></button>
-                <button class="trash-btn"><img src="icons/trash.png" alt=""></button>
+                <button class="arrows-btn"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                <button class="add-btn" onclick="onAddTextLine()"><img src="ICONS/add.png" alt=""></button>
+                <button class="trash-btn"><img src="ICONS/trash.png" alt=""></button>
                 
             </div>
             <div class="text-options">
-                <button class="bigger-text-btn"><img src="ICONS/increase font - icon.png" alt=""></button>
-                <button class="smaller-text-btn"><img src="ICONS/decrease font - icon.png" alt=""></button>
-                <button class="align-left-btn"><img src="ICONS/align-to-left.png" alt=""></button>
-                <button class="align-center-btn"><img src="ICONS/center-text-alignment.png" alt=""></button>
-                <button class="align-right-btn"><img src="ICONS/align-to-right.png" alt=""></button>
-                <select onchange="onSetFont(this.value)">
+                <button class="bigger-text-btn" onclick="onChangeFontSize('+')"><img src="ICONS/increase font - icon.png" alt=""></button>
+                <button class="smaller-text-btn"><img onclick="onChangeFontSize('-')" src="ICONS/decrease font - icon.png" alt=""></button>
+                <button class="align-left-btn  "><img  onclick="onAlignText('left')" src="ICONS/align-to-left.png" alt=""></button>
+                <button class="align-center-btn "><img onclick="onAlignText('center')" src="ICONS/center-text-alignment.png" alt=""></button>
+                <button class="align-right-btn "><img  onclick="onAlignText('right')" src="ICONS/align-to-right.png" alt=""></button>
+                <select class="font-select" onchange="onSetFont(this.value)">
                     <option value="impact">Impact</option>
                     <option value="arial">Arial</option>
                     <option value="courier">Courier</option>

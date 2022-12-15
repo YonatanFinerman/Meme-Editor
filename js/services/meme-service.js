@@ -6,11 +6,11 @@ let gMemes
 
 
 function findMemeById(id){
-    console.log('id',id)
+   
     return gMemes.find(meme=>(+meme.id) === id)
 }
 function findMemeByIdx(idx){
-    console.log('idx',idx)
+   
     return gMemes[idx]
 }
 
