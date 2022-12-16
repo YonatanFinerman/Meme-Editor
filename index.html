@@ -11,8 +11,8 @@
     <header class="main-header flex align-center space-between">
         <div class="logo">Logo</div>
         <nav>
-            <button class="gallery-btn">Gallery</button>
-            <button class="memes-btn">Memes</button>
+            <button class="gallery-btn" onclick="onGallery()">Gallery</button>
+            <button class="memes-btn" onclick="onMyMemes()">Memes</button>
             <button class="about-btn">About</button>
         </nav>
     </header>
@@ -33,7 +33,7 @@
 
     </main>
 
-    <section class="meme-editor flex  " hiddenn>
+    <section class="meme-editor flex" hiddenn>
         <div class="canvas-container">
             <canvas id="my-canvas" height="450" width="450">
             </canvas>
@@ -43,31 +43,37 @@
         <div class="editor flex align-center">
             <input class="meme-text" type="text" oninput="onMemeTextInput(this.value)" placeholder="Write Text">
             <div class="text-line-actions">
-                <button class="arrows-btn"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                <button class="arrows-btn" onclick="onChangeLine()"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
                 <button class="add-btn" onclick="onAddTextLine()"><img src="ICONS/add.png" alt=""></button>
-                <button class="trash-btn"><img src="ICONS/trash.png" alt=""></button>
+                <button class="trash-btn" onclick="onTrashClick()"><img src="ICONS/trash.png" alt=""></button>
                 
             </div>
             <div class="text-options">
                 <button class="bigger-text-btn" onclick="onChangeFontSize('+')"><img src="ICONS/increase font - icon.png" alt=""></button>
-                <button class="smaller-text-btn"><img onclick="onChangeFontSize('-')" src="ICONS/decrease font - icon.png" alt=""></button>
-                <button class="align-left-btn  "><img  onclick="onAlignText('left')" src="ICONS/align-to-left.png" alt=""></button>
-                <button class="align-center-btn "><img onclick="onAlignText('center')" src="ICONS/center-text-alignment.png" alt=""></button>
-                <button class="align-right-btn "><img  onclick="onAlignText('right')" src="ICONS/align-to-right.png" alt=""></button>
+                <button class="smaller-text-btn" onclick="onChangeFontSize('-')"><img src="ICONS/decrease font - icon.png" alt=""></button>
+                <button class="align-left-btn" onclick="onAlignText('left')"><img src="ICONS/align-to-left.png" alt=""></button>
+                <button class="align-center-btn" onclick="onAlignText('center')"><img src="ICONS/center-text-alignment.png" alt=""></button>
+                <button class="align-right-btn" onclick="onAlignText('right')"><img src="ICONS/align-to-right.png" alt=""></button>
                 <select class="font-select" onchange="onSetFont(this.value)">
-                    <option value="impact">Impact</option>
-                    <option value="arial">Arial</option>
-                    <option value="courier">Courier</option>
+                    <option value="Impact">Impact</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Courier">Courier</option>
     
                 </select>
-                <button class="save-btn"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
-                <button class="color-btn"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                <button class="save-btn" onclick="onSaveClick()"><img  src="ICONS/save.png" alt=""></button>
+                <label class="color-btn">
+                    <span ><img class="color-img" src="ICONS/color.png" alt=""></span>
+                    <input class="color-picker" [value]="white" onchange="onColorSet(this.value)" type="color" value="white">
+                </label>
                 
                 
             </div>
             
+            <div class="more-actions ">
+                <button class="share-btn" onclick="onUploadImg()">Upload</button>
+                <button class="download-btn"><a href="#" class="clean-link" onclick="downloadCanvas(this)" download="my-img">download ⤵</a></button>
+            </div>
             
-            <button><a href="#" onclick="downloadCanvas(this)" download="my-img">🖥</a></button>
         </div>
 
     </section>
