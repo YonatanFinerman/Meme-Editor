@@ -33,6 +33,7 @@ function onMyMemes() {
     document.body.classList.remove('menu-open')
     setGIsMyMemes(true)
     renderMemeImgs()
+    setgFilterBy('')
 }
 
 function onGallery() {

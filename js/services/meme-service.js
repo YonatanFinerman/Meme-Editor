@@ -15,7 +15,9 @@ _createMyMemes()
 _addAllKeyWords()
 _loadKeyWordsSizes()
 
-
+function setgFilterBy(val){
+    gFilterBy = val
+}
 
 
 function getKeyWordsSize(){
