@@ -4,67 +4,54 @@ let gCtx
 var gCurrMemeId
 var gCurrMemeUrl
 
-// כשלוחצים על מימ עם מיי דאטה הוא מרנדר את הקנבס עם התמונה הריקה  בצורה שונה
-// תמונה בנפרד ועלייה מדפיס את השורות
-
-
-
 function init() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
     setGIsMyMemes(false)
     renderMemeImgs()
+    renderKeyWordsSizes()
     resizeCanvas()
     window.addEventListener('resize', () => {
-        resizeCanvas
+        resizeCanvas()
         drawImg(gCurrMemeUrl)
     })
+}
+
+// didnt have enught time to fix I know im close
+function renderKeyWordsSizes(){
+    var keyWordsSizes = getKeyWordsSize()
+    Object.keys(keyWordsSizes).forEach(key => {
+        document.querySelector(`.${key}`).style.fontSize = keyWordsSizes[key] + 'px'
+      });
 }
 
 function onMyMemes() {
     document.querySelector('.main-cont').style.display = 'grid'
     document.querySelector('.meme-editor').style.display = 'none'
+    document.querySelector('.gallery-nav').style.display = 'none'
+
     document.body.classList.remove('menu-open')
     setGIsMyMemes(true)
     renderMemeImgs()
-    // renderMyMemes()
 }
 
 function onGallery() {
     document.querySelector('.main-cont').style.display = 'grid'
     document.querySelector('.meme-editor').style.display = 'none'
+    document.querySelector('.gallery-nav').style.display = 'flex'
     document.body.classList.remove('menu-open')
     setGIsMyMemes(false)
     renderMemeImgs()
 }
 
-// function renderMyMemes(){
-//     var myMemes = getMyMemes() 
-//     console.log(myMemes)
-//     var strHTML = myMemes.map((meme) => {
-//         return `<img class="meme-card"   src="${meme}">`
-//     })
-//     document.querySelector('.gallery-container').innerHTML = strHTML.join('')
-// }
-
 
 function renderMemeImgs() {
     var imgs = getMemes()
-
     var strHTML = imgs.map((img) => {
         return `<img class="meme-card" onclick="onCardClick(${img.id})"  src="${img.url}">`
     })
     document.querySelector('.gallery-container').innerHTML = strHTML.join('')
 }
-
-// function renderMemeImgs() {
-//     var imgs = getMemes()
-
-//     var strHTML = imgs.map((img) => {
-//         return `<img class="meme-card" onclick="onCardClick(${img.id})"  src="${img.url}">`
-//     })
-//     document.querySelector('.gallery-container').innerHTML = strHTML.join('')
-// }
 
 function onCardClick(id) {
     var curMeme = findMemeById(id)
@@ -74,32 +61,28 @@ function onCardClick(id) {
     gCurrMemeUrl = curMeme.url
     resizeCanvas()
     drawImg(gCurrMemeUrl)
-
-
 }
-
-// function drawImg(id) {
-//     const elImg = new Image()
-//     elImg.src = `img/${id}.jpg`
-//     elImg.onload = () => {
-
-//         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-//         addTextTOcanvas()
-//     }
-// }
 
 function drawImg(url) {
     const elImg = new Image()
-    elImg.src = `${url}`
+    var currMeme = findMemeById(gCurrMemeId)
+    console.log(currMeme)
+    if (currMeme.oldUrl) {
+        elImg.src = `${currMeme.oldUrl}`
+    }
+    else {
+        elImg.src = `${url}`
+    }
     elImg.onload = () => {
-
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         addTextTOcanvas()
     }
 }
 
+
+
 function onMemeTextInput(val) {
-    var currMeme = getMemes().find(meme => meme.id === gCurrMemeId)
+    var currMeme = findMemeById(gCurrMemeId)
     currMeme.lines[(+currMeme.selectedLineIdx)].text = val
     addTextTOcanvas()
     drawImg(gCurrMemeUrl)
@@ -109,13 +92,10 @@ function onChangeLine() {
     changeCurrExistingLine(gCurrMemeId)
 }
 
-
 function addTextTOcanvas() {
-    let currMeme = getMemes().find(meme => meme.id === gCurrMemeId)
-
+    let currMeme = findMemeById(gCurrMemeId)
     let canvasXCenter = gElCanvas.width / 2
     let canvasYCenter = gElCanvas.height / 2
-
     currMeme.lines.forEach((line, idx) => {
         if (idx === 0) {
 
@@ -128,8 +108,6 @@ function addTextTOcanvas() {
             drawText(line.text, canvasXCenter, canvasYCenter, line.size, line.color, line.align, line.font)
         }
     })
-
-
 }
 
 function resizeCanvas() {
@@ -143,7 +121,8 @@ function onAddTextLine() {
     addTextTOcanvas()
     updateNewLineIdx(gCurrMemeId)
     let elMemeInput = document.querySelector('.meme-text')
-    let currMeme = getMemes().find(meme => meme.id === gCurrMemeId)
+    // let currMeme = getMemes().find(meme => meme.id === gCurrMemeId)
+    let currMeme = findMemeById(gCurrMemeId)
     currMeme.lines.push(addNewLine())
     elMemeInput.value = ''
 }
@@ -211,7 +190,6 @@ function drawText(text, x, y, size = 40, color, align, font) {
     gCtx.font = `${size}px ${font}`;
     gCtx.textAlign = align
     gCtx.textBaseline = 'middle'
-
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
 }
@@ -228,6 +206,21 @@ function onUploadImg() {
 
 function toggleMenu() {
     document.body.classList.toggle('menu-open')
+}
+
+function onFilterMemes(val,ev) {
+    ev.preventDefault()
+    console.log(val)
+    filterMemes(val,)
+    var isExist = checkIfExists(val)
+    if (isExist) {
+        var Sizes = getKeyWordsSize()
+        var size = ++Sizes[val]
+        var elKeyWord = document.querySelector(`.${val}`)
+        elKeyWord.style.fontSize = size + 'px'
+        saveSizes(val)
+    }
+    renderMemeImgs()
 }
 
 

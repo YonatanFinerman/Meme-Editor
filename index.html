@@ -23,16 +23,26 @@
     </header>
     <main class="main-cont">
         <nav class="gallery-nav flex">
-            <input class="meme-search-bar" type="search" place holder="Search">
+            <label for="filter"></label>
+            <input class="meme-search-bar" oninput="onFilterMemes(this.value,event)" list="popular" name="filter" place holder="Search">
+            <datalist id="popular">
+                <option value="Edge">
+                    <option value="funny">
+                    <option value="animal">
+                    <option value="baby">
+                    <option value="comic">
+                    <option value="smile">
+                    <option value="man">
+            </datalist>
            
 
                 <ul class="filter-list flex clean-list"> 
-                    <li><a href="">funny</a></li>
-                    <li><a href="">animal</a></li>
-                    <li><a href="">baby</a></li>
-                    <li><a href="">comic</a></li>
-                    <li><a href="">smile</a></li>
-                    <li><a href="">man</a></li>
+                    <li><a href="" onclick="onFilterMemes('funny',event)" class="funny">funny</a></li>
+                    <li><a href="" onclick="onFilterMemes('animal',event)" class="animal">animal</a></li>
+                    <li><a href="" onclick="onFilterMemes('baby',event)" class="baby">baby</a></li>
+                    <li><a href="" onclick="onFilterMemes('comic',event)"  class="comic">comic</a></li>
+                    <li><a href="" onclick="onFilterMemes('smile',event)" class="smile">smile</a></li>
+                    <li><a href="" onclick="onFilterMemes('man',event)" class="man">man</a></li>
                 </ul>
                 <button class="more-btn">More</button>
             
@@ -79,7 +89,7 @@
             
             <div class="more-actions ">
                 <button class="share-btn" onclick="onUploadImg()">Upload</button>
-                <button class="download-btn"><a href="#" class="clean-link" onclick="downloadCanvas(this)" download="my-img">download ⤵</a></button>
+                <button class="download-btn"><a href="#" class="clean-link" onclick="downloadCanvas(this)" download="my-img">download <span>⤵</span></a></button>
             </div>
             
         </div>
