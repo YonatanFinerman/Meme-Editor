@@ -8,32 +8,40 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body onload="init()">
-    <header class="main-header flex align-center space-between">
+    <header class="main-header flex align-center ">
         <div class="logo">Logo</div>
-        <nav>
-            <button class="gallery-btn" onclick="onGallery()">Gallery</button>
-            <button class="memes-btn" onclick="onMyMemes()">Memes</button>
-            <button class="about-btn">About</button>
+        <nav class="main-nav">
+            <ul  class="clean-list ">
+                <li><button class="gallery-btn" onclick="onGallery()">Gallery</button></li>
+                <li><button class="memes-btn" onclick="onMyMemes()">Memes</button></li>
+                <li><button class="about-btn">About</button></li>
+                
+
+            </ul>
         </nav>
+        <button class="menu-toggle-btn" onclick="toggleMenu()">☰</button>
     </header>
     <main class="main-cont">
         <nav class="gallery-nav flex">
             <input class="meme-search-bar" type="search" place holder="Search">
-            <ul class="filter-list flex clean-list"> 
-                <li><a href="">funny</a></li>
-                <li><a href="">animal</a></li>
-                <li><a href="">baby</a></li>
-                <li><a href="">comic</a></li>
-                <li><a href="">smile</a></li>
-                <li><a href="">man</a></li>
-            </ul>
-            <button>More</button>
+           
+
+                <ul class="filter-list flex clean-list"> 
+                    <li><a href="">funny</a></li>
+                    <li><a href="">animal</a></li>
+                    <li><a href="">baby</a></li>
+                    <li><a href="">comic</a></li>
+                    <li><a href="">smile</a></li>
+                    <li><a href="">man</a></li>
+                </ul>
+                <button class="more-btn">More</button>
+            
         </nav>
         <section class="gallery-container "></section>
 
     </main>
 
-    <section class="meme-editor flex" hiddenn>
+    <section class="meme-editor flex" >
         <div class="canvas-container">
             <canvas id="my-canvas" height="450" width="450">
             </canvas>

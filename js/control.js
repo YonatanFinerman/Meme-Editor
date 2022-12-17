@@ -16,13 +16,15 @@ function init() {
     renderMemeImgs()
     resizeCanvas()
     window.addEventListener('resize', () => {
-        drawImg(url)
+        resizeCanvas
+        drawImg(gCurrMemeUrl)
     })
 }
 
 function onMyMemes() {
     document.querySelector('.main-cont').style.display = 'grid'
     document.querySelector('.meme-editor').style.display = 'none'
+    document.body.classList.remove('menu-open')
     setGIsMyMemes(true)
     renderMemeImgs()
     // renderMyMemes()
@@ -31,6 +33,7 @@ function onMyMemes() {
 function onGallery() {
     document.querySelector('.main-cont').style.display = 'grid'
     document.querySelector('.meme-editor').style.display = 'none'
+    document.body.classList.remove('menu-open')
     setGIsMyMemes(false)
     renderMemeImgs()
 }
@@ -130,7 +133,8 @@ function addTextTOcanvas() {
 }
 
 function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
+    var elContainer = document.querySelector('.canvas-container')
+    const elEditor = document.querySelector('.editor')
     gElCanvas.width = elContainer.offsetWidth
     gElCanvas.height = elContainer.offsetHeight
 }
@@ -220,6 +224,10 @@ function onUploadImg() {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
     }
     doUploadImg(imgDataUrl, onSuccess)
+}
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
 }
 
 

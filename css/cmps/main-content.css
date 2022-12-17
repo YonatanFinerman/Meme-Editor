@@ -1,0 +1,104 @@
+.main-cont{
+    margin: 1rem 0.875rem;
+    background-color: #383b42;
+    justify-content: center;
+    border-radius: 5%;
+    
+}
+
+.gallery-nav{
+    justify-content: center;
+    padding-top: 28px;
+    padding:25px;
+    width: 100%;
+    gap: 20px;
+    flex-wrap: wrap;
+  
+}
+.gallery-container{
+    padding: 45px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    gap:30px;
+     
+}
+
+.filter-list{
+    
+    background-color:  grey;
+    border-radius: 2em;
+    align-items: center;
+    flex-basis: 80%;
+    justify-content: space-evenly;
+}
+
+.filter-list a{
+    color: var(--clr4);
+    text-decoration: none;
+  
+}
+.meme-search-bar{
+    border-radius: 2em;
+    background-color:  #22252c;
+    color: var(--clr4);
+    padding: 20px 50px;
+    flex-basis: 100%;
+    border: none;
+}
+.meme-search-bar::placeholder{
+    color: white;
+    opacity: 1;
+}
+
+.meme-card{
+    display: inline-block;
+    max-width: 100%;
+    border-radius: 10%;
+   
+}
+.more-btn{
+   flex-basis: 20%;
+   height: 36px;
+   background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+   border-radius: 2em;
+   border-width: 0;
+   color: var(--clr4);
+   /* padding: 25px 10px; */
+   align-self: center;
+}
+.more-btn:hover{
+    cursor: pointer;
+        color: var(--clr3);
+        background-image: none;
+        background-color: var(--clr4);
+}
+
+
+
+
+@media (min-width: 780px) {
+    .gallery-container{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    .gallery-nav{
+        flex-wrap: nowrap;
+    }
+    .meme-search-bar{ 
+        flex-basis: 45%;
+      
+    }
+    .more-btn{
+        flex-basis: 10%;
+        height: 36px;
+        align-self: center;
+     }
+     .filter-list{
+        flex-basis: 45%;
+    
+    }
+}
+
+@media (min-width:1060px) {
+
+}
