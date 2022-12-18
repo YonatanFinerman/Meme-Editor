@@ -9,6 +9,8 @@
     padding-left:  123px;
     color: var(--clr4)     ;
     text-transform: uppercase;
+    font-family: Poppins;
+
 }
 
 .main-nav button{
@@ -19,6 +21,7 @@
     border-radius: 2em;
     padding:0.5em 1.3125em;
     transition: all 0.2s;
+    font-family: Poppins;
 }
 
 .menu-toggle-btn{

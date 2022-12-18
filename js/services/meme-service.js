@@ -73,6 +73,7 @@ function createMeme(id) {
                 align: 'center',
                 color: 'white',
                 font: 'Impact',
+                yPos:50,
 
 
             }
@@ -132,7 +133,8 @@ function filterMemes(val) {
 
 function _loadKeyWordsSizes(){
     gKeywordsSize = getFromStorage(POP_STORAGE_KEY)
-    if(!gKeywordsSize || !gKeywordsSize.length ){
+    console.log(gKeywordsSize)
+    if(!gKeywordsSize){
         gKeywordsSize = {funny:15, man:15, animal:15, baby:15, comic:15}
     }
     

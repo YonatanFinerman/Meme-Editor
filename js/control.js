@@ -3,6 +3,8 @@ let gElCanvas
 let gCtx
 var gCurrMemeId
 var gCurrMemeUrl
+var isSelectedLine = false
+const  TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 function init() {
     gElCanvas = document.getElementById('my-canvas')
@@ -11,17 +13,37 @@ function init() {
     renderMemeImgs()
     renderKeyWordsSizes()
     resizeCanvas()
+    addListeners()
+   
+}
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
     window.addEventListener('resize', () => {
         resizeCanvas()
         drawImg(gCurrMemeUrl)
     })
+
 }
 
-// didnt have enught time to fix I know im close
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mousedown', onDown)
+    // gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchstart', onDown)
+    // gElCanvas.addEventListener('touchend', onUp)
+}
+
+
 function renderKeyWordsSizes(){
     var keyWordsSizes = getKeyWordsSize()
     Object.keys(keyWordsSizes).forEach(key => {
-        document.querySelector(`.${key}`).style.fontSize = keyWordsSizes[key] + 'px'
+      document.querySelector(`.${key}`).style.fontSize = keyWordsSizes[key] + 'px'
       });
 }
 
@@ -76,7 +98,13 @@ function drawImg(url) {
     }
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+        
         addTextTOcanvas()
+        // if (isSelectedLine){
+        //     addLineSelector(currMeme.selectedLineIdx)
+        // }
+        
+       
     }
 }
 
@@ -85,7 +113,10 @@ function drawImg(url) {
 function onMemeTextInput(val) {
     var currMeme = findMemeById(gCurrMemeId)
     currMeme.lines[(+currMeme.selectedLineIdx)].text = val
+    
     addTextTOcanvas()
+    // var yStart = currMeme.lines[currMeme.selectedLineIdx].size/2
+    
     drawImg(gCurrMemeUrl)
 }
 
@@ -100,14 +131,17 @@ function addTextTOcanvas() {
     currMeme.lines.forEach((line, idx) => {
         if (idx === 0) {
 
-            drawText(line.text, canvasXCenter, line.size, line.size, line.color, line.align, line.font)
+            drawText(line.text, canvasXCenter, line.size, line.size, line.color, line.align, line.font,idx)
+
+            
         }
         else if (idx === 1) {
-            drawText(line.text, canvasXCenter, gElCanvas.height - line.size, line.size, line.color, line.align, line.font)
+            drawText(line.text, canvasXCenter, gElCanvas.height - line.size, line.size, line.color, line.align, line.font,idx)
         }
         else {
-            drawText(line.text, canvasXCenter, canvasYCenter, line.size, line.color, line.align, line.font)
+            drawText(line.text, canvasXCenter, canvasYCenter, line.size, line.color, line.align, line.font,idx)
         }
+
     })
 }
 
@@ -184,7 +218,8 @@ function onAlignText(val) {
     onMemeTextInput(elMemeInputValue)
 }
 
-function drawText(text, x, y, size = 40, color, align, font) {
+function drawText(text, x, y, size = 40, color, align, font,idx) {
+   
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = color
@@ -193,6 +228,26 @@ function drawText(text, x, y, size = 40, color, align, font) {
     gCtx.textBaseline = 'middle'
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
+
+    // var currMeme = findMemeById(gCurrMemeId)
+    
+    // if(currMeme.selectedLineIdx=== idx){
+    //     if(idx===0){
+    //         drawImg(gCurrMemeUrl)
+    //         drawLine(0,(y/2),gElCanvas.width,(y/2))
+    //         drawLine(0,(y/2)+size,gElCanvas.width,(y/2)+size)
+    //     }
+    //     if(idx===1){
+    //         drawImg(gCurrMemeUrl)
+    //         drawLine(0,gElCanvas.height-size-(size/2),gElCanvas.width,gElCanvas.height-size-(size/2))
+    //         drawLine(0,gElCanvas.height-(size/2),gElCanvas.width,gElCanvas.height-(size/2))
+    //     }
+    //     else if(idx>=2){
+    //         drawImg(gCurrMemeUrl)
+    //         drawLine(0,(gElCanvas.height/2)-(size/2),gElCanvas.width,(gElCanvas.height/2)-(size/2))
+    //         drawLine(0,(gElCanvas.height/2)+(size/2),gElCanvas.width,(gElCanvas.height/2)+(size/2))
+    //     }
+    // }
 }
 
 function onUploadImg() {
@@ -223,6 +278,71 @@ function onFilterMemes(val,ev) {
     }
     renderMemeImgs()
 }
+
+function drawLine(x, y, xEnd = 250, yEnd = 250) {
+
+    gCtx.lineWidth = 2
+    gCtx.moveTo(x, y)
+    gCtx.lineTo(xEnd, yEnd)
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
+
+}
+ 
+function addLineSelector(LineIdx){
+        var currMeme = findMemeById(gCurrMemeId)
+    
+      var lineSize = currMeme.lines[LineIdx].size
+        if(LineIdx===0){
+
+            var yS = currMeme.lines[currMeme.selectedLineIdx].yStart = (currMeme.lines[currMeme.selectedLineIdx].size/2) -5
+        
+        }
+        else if(LineIdx===1){
+            var yS = currMeme.lines[currMeme.selectedLineIdx].yStart = gElCanvas.height - lineSize - (lineSize/2)-5
+            
+        }
+        else if(LineIdx>=2){
+            var yS = currMeme.lines[currMeme.selectedLineIdx].yStart = (gElCanvas.height/2) - (lineSize/2)-5
+           
+        }
+        var yE = currMeme.lines[currMeme.selectedLineIdx].yEnd = yS + currMeme.lines[currMeme.selectedLineIdx].size + 5
+         drawLine(0,yS,gElCanvas.width,yS)
+         drawLine(0,yE,gElCanvas.width,yE)
+         console.log('yssss',yS,yE)
+         resizeCanvas()
+}
+
+
+
+// function getEvPos(ev) {
+//     // Gets the offset pos , the default poss
+//     let pos = {
+//         x: ev.offsetX,
+//         y: ev.offsetY,
+//     }
+//     console.log('ev:', ev)
+//     // Check if its a touch ev
+//     if (TOUCH_EVS.includes(ev.type)) {
+//         console.log('ev:', ev)
+//         //soo we will not trigger the mouse ev
+//         ev.preventDefault()
+//         //Gets the first touch point
+//         ev = ev.changedTouches[0]
+//         //Calc the right pos according to the touch screen
+//         pos = {
+//             x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+//             y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+//         }
+//     }
+//     return pos
+// }
+// function onDown(ev){
+//     getEvPos(ev)
+// }
+// function onMove(ev){
+//     getEvPos(ev)
+// }
 
 
 

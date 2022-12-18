@@ -39,7 +39,7 @@
 .filter-list a{
     color: var(--clr4);
     text-decoration: none;
-    font-size: 15px;
+    /* font-size: 15px; */
   
 }
 .meme-search-bar{
@@ -63,7 +63,16 @@
 }
 .meme-card:hover{
     box-shadow: -6px 0px 14px rgb(255, 255, 255);
+    cursor: pointer;
+    animation: roll 1s ease-in alternate 1; 
 }
+
+@keyframes roll {
+    to {
+        rotate: 360deg;
+    }
+}
+
 
 .more-btn{
    flex-basis: 10%;

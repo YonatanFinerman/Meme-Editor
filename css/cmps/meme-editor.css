@@ -4,28 +4,38 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
 
 }
 .canvas-container{
     width: 90%;
-    height: 500px;
+    height: 400px;
+  
 }
+.meme-text-outline{
+    position: fixed;
+    /* background-color: transparent; */
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 60px;
+    font-size: 50px;
+    width: 500px;
+    top:108px;  
+}
+
+
 
 canvas {
     display: block;
     outline: 1px solid black;
     background-color: white;
-    border-radius: 10px;
 }
 
 .editor{
     width: 90%;
     height: 400px;
     background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
-    
-    
     flex-direction: column;
-    border-radius: 10px;
 }
 
 .text-line-actions{
@@ -169,11 +179,16 @@ canvas {
 
     .canvas-container{
         width: 31.25em;
+        height: 500px;
+    }
+    canvas{
+        border-radius: 10px;
     }
     
     .editor{
         width: 31.25em;
         height: 500px;
+        border-radius: 10px;
     }
 
     .text-line-actions{
